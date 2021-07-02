@@ -20,16 +20,15 @@ import (
  */
 
 func solve(meal_cost float64, tip_percent int32, tax_percent int32) {
-	// Write your code here
-	var total_cost float64
 	// count total cost, note: float can not compute with int, so need to convert type.
-	total_cost = meal_cost + (meal_cost * float64(tip_percent) / 100) + (meal_cost * float64(tax_percent) / 100)
+	var total_cost float64 = meal_cost + (meal_cost * float64(tip_percent) / 100) + (meal_cost * float64(tax_percent) / 100)
 	// math.Round() make float64 0.5 to 1, 1.4 to 1.
 	fmt.Println(math.Round(total_cost))
 
 }
 
 func main() {
+	//---> this part only to read input //
 	reader := bufio.NewReaderSize(os.Stdin, 16*1024*1024)
 
 	meal_cost, err := strconv.ParseFloat(strings.TrimSpace(readLine(reader)), 64)
@@ -42,6 +41,7 @@ func main() {
 	tax_percentTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
 	checkError(err)
 	tax_percent := int32(tax_percentTemp)
+	// this part only to read input <---//
 
 	solve(meal_cost, tip_percent, tax_percent)
 }

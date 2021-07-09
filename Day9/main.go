@@ -19,6 +19,7 @@ import (
  * if input factorial(5) = 5*4*3*2*1 = 120
  */
 
+// soultion 1
 func factorial(n int32) int32 {
 	// Write your code here
 	var fin int32 = 1
@@ -30,6 +31,14 @@ func factorial(n int32) int32 {
 	}
 	fin = n
 	return fin
+}
+
+// soultion 2
+func factorial2(n int32) int32 {
+	if n == 1 || n == 0 {
+		return 1
+	}
+	return n * factorial2(n-1)
 }
 
 func main() {

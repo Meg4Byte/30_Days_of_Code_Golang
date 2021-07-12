@@ -58,4 +58,13 @@ func main() {
 			fmt.Printf("%v\n", m)
 		}
 	}
+	// example pointer, use real address to Compute function to let real address x equal 0.
+	// https://ithelp.ithome.com.tw/articles/10204330
+	x := 5
+	Compute(&x)
+	fmt.Println(x) // output = 0
+}
+
+func Compute(a *int) {
+	*a = 0
 }

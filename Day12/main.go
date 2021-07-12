@@ -66,7 +66,7 @@ func main() {
 		checkError(err)
 		realNumList = append(realNumList, j)
 	}
-	p := &person{firstName: f, lastName: l, id: id, numberList: realNumList}
+	p := person{firstName: f, lastName: l, id: id, numberList: realNumList}
 	p.PrintPerson()
 	p.PrintCalculate()
 

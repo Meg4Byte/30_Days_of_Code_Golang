@@ -63,9 +63,7 @@ func main() {
 	var realNumList = []int{}
 	for _, i := range arrTemp {
 		j, err := strconv.Atoi(i)
-		if err != nil {
-			panic(err)
-		}
+		checkError(err)
 		realNumList = append(realNumList, j)
 	}
 	p := &person{firstName: f, lastName: l, id: id, numberList: realNumList}

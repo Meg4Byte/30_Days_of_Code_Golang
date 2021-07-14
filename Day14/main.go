@@ -22,8 +22,8 @@ func main() {
 	var numberArray = make([]int, int(arraylength))
 
 	for k, v := range stringArray {
-		n, _ := strconv.ParseInt(v, 10, 0)
-		numberArray[k] = int(n)
+		n, _ := strconv.Atoi(v)
+		numberArray[k] = n
 	}
 
 	sort.Ints(numberArray)

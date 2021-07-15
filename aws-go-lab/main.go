@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -11,8 +12,15 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
+func getEnv() string {
+	if v, ok := os.LookupEnv("AWS_PROFILE"); ok {
+		return v
+	}
+	return "Not Found!!!"
+}
+
 func GetIamConfigure() aws.Config {
-	//cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithSharedConfigProfile("neil"))
+	//cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithSharedConfigProfile("profile-name"))
 	cfg, err := config.LoadDefaultConfig(context.TODO())
 	checkError(err)
 	return cfg
@@ -44,6 +52,7 @@ func main() {
 	ListAllBuckets(defConfg)
 	fmt.Println("Hello I am IAM: ")
 	fmt.Printf("%v\n", stsGetCallerIdentity(defConfg))
+	fmt.Println(getEnv())
 }
 
 func checkError(err error) {

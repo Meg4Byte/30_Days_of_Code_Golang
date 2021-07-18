@@ -63,8 +63,23 @@ func main() {
 	x := 5
 	Compute(&x)
 	fmt.Println(x) // output = 0
+	k := []int{1, 2, 3, 4}
+	fmt.Println(runningSum(k))
 }
 
 func Compute(a *int) {
 	*a = 0
+}
+
+func runningSum(nums []int) []int {
+	var finalArray []int
+	for i := 0; i < len(nums); i++ {
+		value := 0
+		for _, v := range nums[:i+1] {
+			value += v
+		}
+		finalArray = append(finalArray, value)
+	}
+
+	return finalArray
 }

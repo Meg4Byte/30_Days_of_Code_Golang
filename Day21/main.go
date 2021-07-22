@@ -16,7 +16,7 @@ func main() {
 	nTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
 	checkError(err)
 	n := int32(nTemp)
-	var numberArray []int32
+	var numberArray []interface{}
 	for i := 0; int32(i) < n; i++ {
 		nreader := bufio.NewReader(os.Stdin)
 		nTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(nreader)), 10, 64)
@@ -29,16 +29,15 @@ func main() {
 	sTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(sreader)), 10, 64)
 	checkError(err)
 	s := int32(sTemp)
-	var stringArray []string
+	var stringArray []interface{}
 	for i := 0; int32(i) < s; i++ {
 		sreader := bufio.NewReader(os.Stdin)
 		sTemp := readLine(sreader)
 		checkError(err)
 		stringArray = append(stringArray, sTemp)
 	}
-
-	printnumberArray(numberArray)
-	printstringArray(stringArray)
+	printArray(numberArray)
+	printArray(stringArray)
 }
 
 func readLine(reader *bufio.Reader) string {
@@ -56,14 +55,13 @@ func checkError(err error) {
 	}
 }
 
-func printstringArray(x []string) {
+func printArray(x []interface{}) {
 	for _, v := range x {
-		fmt.Println(v)
-	}
-}
-
-func printnumberArray(x []int32) {
-	for _, v := range x {
-		fmt.Println(v)
+		switch v.(type) {
+		case int32:
+			fmt.Println(v)
+		case string:
+			fmt.Println(v)
+		}
 	}
 }

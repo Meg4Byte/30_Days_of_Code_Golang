@@ -83,3 +83,13 @@ func runningSum(nums []int) []int {
 
 	return finalArray
 }
+
+func runningSumViaGithubCopilot(nums []int) []int {
+	var sum int
+	var result []int
+	for _, num := range nums {
+		sum += num
+		result = append(result, sum)
+	}
+	return result
+}

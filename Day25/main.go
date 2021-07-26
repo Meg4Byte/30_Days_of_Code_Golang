@@ -22,6 +22,7 @@ func checkPrime(num float64) string {
 func main() {
 	var t int
 	fmt.Scan(&t)
+	// make slice size.
 	s := make([]float64, t)
 
 	for k := range s {

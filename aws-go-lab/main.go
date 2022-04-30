@@ -8,6 +8,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/iam"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
@@ -46,6 +48,19 @@ func stsGetCallerIdentity(cfg aws.Config) string {
 	return string(*v.Arn)
 }
 
+func ListIAMPolicy(cfg aws.Config) {
+	iamsvc := iam.NewFromConfig(cfg)
+	pl, err := iamsvc.ListPolicies(context.TODO(), &iam.ListPoliciesInput{
+		Scope:    types.PolicyScopeTypeAws,
+		MaxItems: aws.Int32(1000),
+	})
+	checkError(err)
+	fmt.Println(pl.IsTruncated)
+	for i, policy := range pl.Policies {
+		fmt.Printf("%v: %v\n", i, *policy.PolicyName)
+	}
+}
+
 func main() {
 	defConfg := GetIamConfigure()
 	fmt.Println("Let's List Buckets")
@@ -53,6 +68,8 @@ func main() {
 	fmt.Println("Hello I am IAM: ")
 	fmt.Printf("%v\n", stsGetCallerIdentity(defConfg))
 	fmt.Println(getEnv())
+
+	ListIAMPolicy(defConfg)
 }
 
 func checkError(err error) {
